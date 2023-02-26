@@ -1,0 +1,50 @@
+// CONSTANT WIDTH
+$grid__bp-sm : 36;
+$grid__bp-md : 48;
+$grid__bp-lg : 62;
+$grid__bp-xl : 75;
+$grid__bp-2xl: 96;
+
+$grid__cols: 12; // integer columns
+
+$map-grid-props: (
+        ''    : 0,
+        '-sm' : $grid__bp-sm,
+        '-md' : $grid__bp-md,
+        '-lg' : $grid__bp-lg,
+        '-xl' : $grid__bp-xl,
+        '-2xl': $grid__bp-2xl
+);
+
+// CONSTANT COLORS
+// just for demonstation purpose
+$bg_green-light: #88d8b0;
+
+$bg_yellow-light: #ffeead;
+
+$bg_red-light: #ff6f69;
+
+$themes: (
+  light: (
+    backgroundColor: #fff,
+    textColor: #37352f,
+    buttonTextColor: #37352f,
+    buttonTextTransform: none,
+    buttonTextHoverColor: #37352f,
+    buttonColor: #fff,
+    buttonBorder: 2px solid #37352f,
+    boxShadow: #fff,
+    borderColor: #37352f,
+  ),
+  dark: (
+    backgroundColor: #1a1c1e,
+    textColor: #f7f7f5,
+    buttonTextColor: #aaa,
+    buttonTextTransform: uppercase,
+    buttonTextHoverColor: #f7f7f5,
+    buttonColor: #333,
+    buttonBorder: 1px solid #333,
+    boxShadow: #f7f7f5,
+    borderColor:white,
+  ),
+);

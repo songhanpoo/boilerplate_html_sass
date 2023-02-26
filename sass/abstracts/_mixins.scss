@@ -1,0 +1,62 @@
+@mixin create-mq($breakpoint, $min-or-max) {
+  @if($breakpoint == 0) {
+    @content;
+  } @else {
+    @media screen and (#{$min-or-max}-width: $breakpoint *1rem) {
+      @content;
+    }
+  }
+}
+
+@mixin create-col-classes($modifier, $grid-cols, $breakpoint) {
+  @include create-mq($breakpoint, 'min') {
+    &__col#{$modifier}-offset-0 {
+      margin-left: 0;
+    }
+    @for $i from 1 through $grid-cols {
+      &__col#{$modifier}-#{$i} {
+        flex-basis: calc((100 / ($grid-cols / $i) ) * 1%);
+      }
+      &__col#{$modifier}-offset-#{$i} {
+        margin-left: calc((100 / ($grid-cols / $i) ) * 1%);
+      }
+    }
+  }
+}
+
+@each $modifier , $breakpoint in $map-grid-props {
+  @if($modifier == '') {
+    $modifier: '-xs';
+  }
+  @include create-mq($breakpoint - 1, 'max') {
+    .hidden#{$modifier}-down {
+      display: none !important;
+    }
+  }
+  @include create-mq($breakpoint, 'min') {
+    .hidden#{$modifier}-up {
+      display: none !important;
+    }
+  }
+}
+
+/*
+ * Implementation of themes
+ */
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
